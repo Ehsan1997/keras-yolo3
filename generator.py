@@ -34,6 +34,11 @@ class BatchGenerator(Sequence):
         self.net_w              = 416
 
         if shuffle: np.random.shuffle(self.instances)
+
+        # A jugar to prevent me from changing all the xml annotations error:
+        # Temp Jugar:
+        for instance in self.instances:
+          instance['filename'] = instance['filename'] + '.jpg'
             
     def __len__(self):
         return int(np.ceil(float(len(self.instances))/self.batch_size))           
@@ -156,7 +161,7 @@ class BatchGenerator(Sequence):
         return self.net_h, self.net_w
     
     def _aug_image(self, instance, net_h, net_w):
-        image_name = instance['filename'] + '.jpg'
+        image_name = instance['filename']
         image = cv2.imread(image_name) # RGB image
         
         if image is None: print('Cannot find ', image_name)
