@@ -155,8 +155,7 @@ class BatchGenerator(Sequence):
     def _get_net_size(self, idx):
         if idx%10 == 0:
             net_size = self.downsample*np.random.randint(self.min_net_size/self.downsample, \
-                                                         self.max_net_size/self.downsample+1)
-            print("resizing: ", net_size, net_size)
+                                                         self.max_net_size/self.downsample+1)\
             self.net_h, self.net_w = net_size, net_size
         return self.net_h, self.net_w
     
